@@ -4,9 +4,11 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 
 
 //note we now create our own view class that extends the built-in View class
@@ -55,8 +57,19 @@ class GameView : View {
                 game?.pacy!!.toFloat(), paint)
 
         //TODO loop through the list of goldcoins and draw them.
+        for (GoldCoin in game!!.coins) {
+            if (!GoldCoin.taken) {
+                //ResourcesCompat.getDrawable(context.resources, R.drawable.coin, null)
+                val paint = Paint()
+                paint.color = Color.YELLOW
+                canvas.drawCircle(GoldCoin.x.toFloat(), GoldCoin.y.toFloat(), 30f, paint)
+            } else {
+                paint.color = Color.WHITE
+                canvas.drawCircle(GoldCoin.x.toFloat(), GoldCoin.y.toFloat(), 30f, paint)
+            }
+        }
 
-        game?.doCollisionCheck()
+        //game?.doCollisionCheck()
         super.onDraw(canvas)
     }
 
