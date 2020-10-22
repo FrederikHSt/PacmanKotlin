@@ -4,13 +4,13 @@ class Pacman constructor(override var x: Int, override var y: Int, var game: Gam
 
     fun doMove(direction: String) {
         if (direction == "RIGHT") {
-            move(2,0)
+            move(1,0)
         } else if (direction == "LEFT") {
-            move(-2, 0)
+            move(-1, 0)
         } else if (direction == "UP") {
-            move(0, -2)
+            move(0, -1)
         } else if (direction == "DOWN") {
-            move(0, 2)
+            move(0, 1)
         }
     }
 

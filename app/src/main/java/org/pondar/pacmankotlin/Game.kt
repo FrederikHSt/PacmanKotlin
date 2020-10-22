@@ -5,18 +5,25 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.TextView
 import android.widget.Toast
+import java.util.*
 
 /*GAME LOGIC*/
-class Game(private var context: Context,view: TextView) {
+class Game(private var context: Context,
+           private var pointsView: TextView,
+           private var countView: TextView) {
 
-    // POINTS
-    private var pointsView: TextView = view
     private var points: Int = 0
-    private var pointsText: String = ""
+    private var pointsText: String = points.toString()
 
-    // COORDINATES
+    var counter: Int = 0
+    private var counterText: String = counter.toString()
+
+    // PACMAN MOVEMENT
     var pacx: Int = 0
     var pacy: Int = 0
+    var running = false
+    var direction = 0
+
 
     // BITMAPS
     var pacBitmap: Bitmap
@@ -63,9 +70,27 @@ class Game(private var context: Context,view: TextView) {
         ghost.x = 15
         ghost.y = 15
         points = 0
-        pointsText = "${context.resources.getString(R.string.points)} $points"
-        pointsView.text = pointsText
+        direction = 0
+        counter = 0
+        //pointsText = "Points: $points"
+        //pointsView.text = pointsText
+        updateCountText()
+        updateScore()
+        //counterText = "Time: $counter"
+        //countView.text = counterText
         gameView?.invalidate() // redraw screen
+
+    }
+
+    fun count() {
+        counter++
+        updateCountText()
+        //counterText = "Time: $counter"
+    }
+
+    private fun updateCountText() {
+        counterText = "Time: $counter"
+        countView.text = counterText
     }
 
     /*CALLED AFTER EACH MOVE FOR GHOST MOVE AND COLLISION CHECK*/
@@ -80,6 +105,8 @@ class Game(private var context: Context,view: TextView) {
         // COIN COLLISION
         if (coin.x == pacman.x && coin.y == pacman.y) {
             points++
+            //pointsText = "Points: $points"
+            //pointsView.text = pointsText
             updateScore()
             coin.toRandomPosition()
             gameView?.invalidate() // redraw screen
@@ -96,7 +123,10 @@ class Game(private var context: Context,view: TextView) {
     }
     /*UPDATE POINTS ON SCREEN*/
     private fun updateScore() {
-        pointsText = "${context.resources.getString(R.string.points)} $points"
+        //pointsText = "${context.resources.getString(R.string.points)} $points"
+        pointsText = "Points: $points"
         pointsView.text = pointsText
     }
+
+
 }
