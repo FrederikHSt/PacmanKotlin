@@ -27,7 +27,6 @@ class Game(private var context: Context,
     var running = false
     var direction = 0
 
-
     // BITMAPS
     var pacBitmap: Bitmap
     var coinBitmap: Bitmap
@@ -74,26 +73,10 @@ class Game(private var context: Context,
         ghost.y = 15
         points = 0
         direction = 0
-        counter = 0
-        //pointsText = "Points: $points"
-        //pointsView.text = pointsText
+        counter = 60
         updateCountText()
         updateScore()
-        //counterText = "Time: $counter"
-        //countView.text = counterText
         gameView?.invalidate() // redraw screen
-
-    }
-
-    fun count() {
-        counter++
-        updateCountText()
-        //counterText = "Time: $counter"
-    }
-
-    private fun updateCountText() {
-        counterText = "Time: $counter"
-        countView.text = counterText
     }
 
     /*CALLED AFTER EACH MOVE FOR GHOST MOVE AND COLLISION CHECK*/
@@ -108,8 +91,6 @@ class Game(private var context: Context,
         // COIN COLLISION
         if (coin.x == pacman.x && coin.y == pacman.y) {
             points++
-            //pointsText = "Points: $points"
-            //pointsView.text = pointsText
             updateScore()
             coin.toRandomPosition()
             gameView?.invalidate() // redraw screen
@@ -119,6 +100,25 @@ class Game(private var context: Context,
             gameOver()
         }
     }
+
+    fun count() {
+        counter--
+        updateCountText()
+    }
+
+    fun winGame() {
+        if (hiscore < points) {
+            hiscore = points
+            updateHiscore()
+        }
+        Toast.makeText(context, "Time ran out", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun updateCountText() {
+        counterText = "Time: $counter"
+        countView.text = counterText
+    }
+
     /*GHOST COLLISION -> GAME OVER*/
     private fun gameOver() {
         hiscore = points
@@ -126,9 +126,9 @@ class Game(private var context: Context,
         Toast.makeText(context, "Game Over", Toast.LENGTH_SHORT).show()
         newGame()
     }
+
     /*UPDATE POINTS ON SCREEN*/
     private fun updateScore() {
-        //pointsText = "${context.resources.getString(R.string.points)} $points"
         pointsText = "Points: $points"
         pointsView.text = pointsText
     }
@@ -137,6 +137,4 @@ class Game(private var context: Context,
         hiscoreText = "Hiscore: $hiscore"
         hiscoreView.text = hiscoreText
     }
-
-
 }

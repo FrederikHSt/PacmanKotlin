@@ -24,14 +24,12 @@ class GameView : View {
         this.game = game
     }
 
-
     /* The next 3 constructors are needed for the Android view system,
 	when we have a custom view.
 	 */
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
@@ -74,7 +72,6 @@ class GameView : View {
                 game?.ghost?.canvasX(w, game?.ghostBitmap!!.width)!! + (w / Game.gridWidth),
                 game?.ghost?.canvasY(h, game?.ghostBitmap!!.height)!! + (h / Game.gridHeight)
         ), paint)
-
         game?.doCollisionCheck()
         super.onDraw(canvas)
     }

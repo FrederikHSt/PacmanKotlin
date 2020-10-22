@@ -31,9 +31,4 @@ class Ghost(override var x: Int, override var y: Int, var pacman: Pacman) : Game
             }
         }
     }
-
-    private fun getRandom() {
-        if (Random.nextInt(0,1) > 0)
-            return
-    }
 }
