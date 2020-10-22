@@ -10,13 +10,16 @@ import java.util.*
 /*GAME LOGIC*/
 class Game(private var context: Context,
            private var pointsView: TextView,
-           private var countView: TextView) {
+           private var countView: TextView, private var hiscoreView: TextView) {
 
     private var points: Int = 0
     private var pointsText: String = points.toString()
 
     var counter: Int = 0
     private var counterText: String = counter.toString()
+
+    var hiscore: Int = 0
+    private  var hiscoreText: String = hiscore.toString()
 
     // PACMAN MOVEMENT
     var pacx: Int = 0
@@ -118,6 +121,8 @@ class Game(private var context: Context,
     }
     /*GHOST COLLISION -> GAME OVER*/
     private fun gameOver() {
+        hiscore = points
+        updateHiscore()
         Toast.makeText(context, "Game Over", Toast.LENGTH_SHORT).show()
         newGame()
     }
@@ -126,6 +131,11 @@ class Game(private var context: Context,
         //pointsText = "${context.resources.getString(R.string.points)} $points"
         pointsText = "Points: $points"
         pointsView.text = pointsText
+    }
+
+    private fun updateHiscore() {
+        hiscoreText = "Hiscore: $hiscore"
+        hiscoreView.text = hiscoreText
     }
 
 
