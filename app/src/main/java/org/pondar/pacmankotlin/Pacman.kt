@@ -2,7 +2,19 @@ package org.pondar.pacmankotlin
 
 class Pacman constructor(override var x: Int, override var y: Int, var game: Game): GameObject {
 
-    fun move(xx: Int, yy: Int) {
+    fun doMove(direction: String) {
+        if (direction == "RIGHT") {
+            move(2,0)
+        } else if (direction == "LEFT") {
+            move(-2, 0)
+        } else if (direction == "UP") {
+            move(0, -2)
+        } else if (direction == "DOWN") {
+            move(0, 2)
+        }
+    }
+
+    private fun move(xx: Int, yy: Int) {
         this.x += xx
         this.y += yy
         this.x = this.x.coerceIn(0 until Game.gridHeight)

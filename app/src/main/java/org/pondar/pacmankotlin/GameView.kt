@@ -39,26 +39,18 @@ class GameView : View {
     //drawn whenever we update the screen.
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
-        //Here we get the height and weight
+        // GETTING HEIGHT AND WIDTH
         h = canvas.height
         w = canvas.width
         //update the size for the canvas to the game.
         game?.setSize(h, w)
-        Log.d("GAMEVIEW", "h = $h, w = $w")
-
-        //are the coins initiazlied?
-        //if (!(game!!.coinsInitialized))
-            //game?.initializeGoldcoins()
-
+        //Log.d("GAMEVIEW", "h = $h, w = $w")
 
         //Making a new paint object
         val paint = Paint()
         canvas.drawColor(Color.WHITE) //clear entire canvas to white color
 
-        //draw the pacman
-        //canvas.drawBitmap(game!!.pacBitmap, game?.pacx!!.toFloat(),
-                //game?.pacy!!.toFloat(), paint)
-
+        /*DRAW PACMAN*/
         canvas.drawBitmap(game!!.pacBitmap, null, RectF(
                 game?.pacman?.canvasX(w, game?.pacBitmap!!.width)!!,
                 game?.pacman?.canvasY(h, game?.pacBitmap!!.height)!!,
@@ -66,7 +58,7 @@ class GameView : View {
                 game?.pacman?.canvasY(h, game?.pacBitmap!!.height)!! + (h / Game.gridHeight)
         ), paint)
 
-        // Draw coins
+        /*DRAW COIN*/
         canvas.drawBitmap(game!!.coinBitmap, null, RectF(
                 game?.coin?.canvasX(w, game?.coinBitmap!!.width)!!,
                 game?.coin?.canvasY(h, game?.coinBitmap!!.height)!!,
@@ -74,7 +66,7 @@ class GameView : View {
                 game?.coin?.canvasY(h, game?.coinBitmap!!.height)!! + (h / Game.gridHeight)
         ), paint)
 
-        // Draw the Ghost
+        /*DRAW GHOST*/
         canvas.drawBitmap(
                 game!!.ghostBitmap, null, RectF(
                 game?.ghost?.canvasX(w, game?.ghostBitmap!!.width)!!,
@@ -83,22 +75,7 @@ class GameView : View {
                 game?.ghost?.canvasY(h, game?.ghostBitmap!!.height)!! + (h / Game.gridHeight)
         ), paint)
 
-
-        //TODO loop through the list of goldcoins and draw them.
-        /*for (GoldCoin in game!!.coins) {
-            if (!GoldCoin.taken) {
-                //ResourcesCompat.getDrawable(context.resources, R.drawable.coin, null)
-                val paint = Paint()
-                paint.color = Color.YELLOW
-                canvas.drawCircle(GoldCoin.x.toFloat(), GoldCoin.y.toFloat(), 30f, paint)
-            } else {
-                paint.color = Color.WHITE
-                canvas.drawCircle(GoldCoin.x.toFloat(), GoldCoin.y.toFloat(), 30f, paint)
-            }
-        }*/
-
         game?.doCollisionCheck()
         super.onDraw(canvas)
     }
-
 }
