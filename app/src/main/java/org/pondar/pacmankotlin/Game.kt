@@ -114,11 +114,6 @@ class Game(private var context: Context,
         Toast.makeText(context, "Time ran out", Toast.LENGTH_SHORT).show()
     }
 
-    private fun updateCountText() {
-        counterText = "Time: $counter"
-        countView.text = counterText
-    }
-
     /*GHOST COLLISION -> GAME OVER*/
     private fun gameOver() {
         hiscore = points
@@ -127,12 +122,19 @@ class Game(private var context: Context,
         newGame()
     }
 
+    /*UPDATE TIME ON SCREEN*/
+    private fun updateCountText() {
+        counterText = "Time: $counter"
+        countView.text = counterText
+    }
+
     /*UPDATE POINTS ON SCREEN*/
     private fun updateScore() {
         pointsText = "Points: $points"
         pointsView.text = pointsText
     }
 
+    /*UPDATE HIGHSCORE ON SCREEN*/
     private fun updateHiscore() {
         hiscoreText = "Hiscore: $hiscore"
         hiscoreView.text = hiscoreText
