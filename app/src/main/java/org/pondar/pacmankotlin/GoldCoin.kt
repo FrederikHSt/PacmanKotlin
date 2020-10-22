@@ -1,18 +1,13 @@
 package org.pondar.pacmankotlin
 
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
+import kotlin.random.Random
 
 //Here you need to fill out what should be in a GoldCoin and what should the constructor be
-class GoldCoin(arrayX: Int, arrayY: Int) {
-    var x = 0
-    var y = 0
-
-    var taken = false
-
-    init {
-        x = arrayX
-        y = arrayY
+class GoldCoin(override var x: Int, override var y: Int): GameObject {
+    fun toRandomPosition() {
+        this.x = Random.nextInt(0, Game.gridWidth - 1)
+        this.y = Random.nextInt(0, Game.gridHeight - 1)
     }
 
 
